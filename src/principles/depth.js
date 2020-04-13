@@ -5,8 +5,8 @@ const zIndexes = {
 };
 
 const boxShadows = {
-  narrow: `rgba(0, 0, 0, 0.15) 0 10px 20px`,
+  default: `rgba(0, 0, 0, 0.15) 0 10px 20px`,
   wide: `rgba(0, 0, 0, 0.2) 0 20px 40px`,
 };
 
-export { zIndexes, boxShadows };
+export default { zIndexes, boxShadows };
