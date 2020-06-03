@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+import { Button } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
 import { colors, depth, sizes, typography } from '../../principles';
 
 const ModalWrapper = styled.div`
@@ -20,56 +22,76 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   left: 50%;
-  max-height: 90%;
-  max-width: 500px;
+  max-height: 75%;
+  max-width: 750px;
   padding: ${sizes.lg}px;
   position: relative;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 75%;
+  width: 90%;
+`;
+
+const Content = styled.div`
+  overflow: auto;
+  margin: ${sizes.md}px 0;
 `;
 
 const Header = styled.h3`
   ${typography.types.MSemi}
+  padding-right: ${sizes.xxl}px;
 `;
 
 const Footer = styled.div`
   display: flex;
   justify-content: flex-end;
+
+  button {
+    margin: 0 ${sizes.micro}px;
+  }
 `;
 
-const Modal = ({
-  showModal,
-  children,
-  onClose,
-  onOK,
-  title,
-  hasHeader,
-  hasFooter,
-}) => {
-  return (
-    showModal && (
-      <ModalWrapper>
-        <ContentContainer>
-          {hasHeader && <Header>{title}</Header>}
-          {children}
-          {hasFooter && (
-            <Footer>
-              <button onClick={onClose}>Close</button>
-              <button onClick={onOK}>OK</button>
-            </Footer>
-          )}
-        </ContentContainer>
-      </ModalWrapper>
-    )
-  );
-};
+const CloseButton = styled.button`
+  align-items: center;
+  background-color: ${colors.lightGray};
+  border-radius: 50%;
+  border: none;
+  color: ${colors.blue};
+  cursor: pointer;
+  display: flex;
+  font-size: ${sizes.md}px;
+  height: ${sizes.xxl}px;
+  justify-content: center;
+  outline: none;
+  position: absolute;
+  right: ${sizes.micro}px;
+  top: ${sizes.micro}px;
+  width: ${sizes.xxl}px;
+}
 
-Modal.defaultProps = {
-  showModal: false,
-  title: '',
-  hasHeader: true,
-  hasFooter: true,
-};
+  &:hover, &:active, &:focus {
+    box-shadow: ${depth.boxShadows.narrow};
+  }
+`;
+
+const Modal = ({ showModal, children, onClose, onOK, title, hasFooter }) =>
+  showModal && (
+    <ModalWrapper>
+      <ContentContainer>
+        {title && <Header>{title}</Header>}
+        <CloseButton onClick={onClose}>
+          <CloseOutlined />
+        </CloseButton>
+        <Content>{children}</Content>
+        {hasFooter && (
+          <Footer>
+            <Button onClick={onClose}>Close</Button>
+            <Button type="primary" onClick={onOK}>
+              OK
+            </Button>
+          </Footer>
+        )}
+      </ContentContainer>
+    </ModalWrapper>
+  );
 
 export default Modal;
