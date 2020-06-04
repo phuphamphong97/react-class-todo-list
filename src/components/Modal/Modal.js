@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 
 import { Button } from 'antd';
@@ -24,11 +24,17 @@ const ContentContainer = styled.div`
   left: 50%;
   max-height: 75%;
   max-width: 750px;
+  opacity: 0;
   padding: ${sizes.lg}px;
   position: relative;
   top: 50%;
   transform: translate(-50%, -50%);
+  transition: opacity 0.3s;
   width: 90%;
+
+  &.modal-open {
+    opacity: 1;
+  }
 `;
 
 const Content = styled.div`
@@ -73,25 +79,43 @@ const CloseButton = styled.button`
   }
 `;
 
-const Modal = ({ showModal, children, onClose, onOK, title, hasFooter }) =>
-  showModal && (
-    <ModalWrapper>
-      <ContentContainer>
-        {title && <Header>{title}</Header>}
-        <CloseButton onClick={onClose}>
-          <CloseOutlined />
-        </CloseButton>
-        <Content>{children}</Content>
-        {hasFooter && (
-          <Footer>
-            <Button onClick={onClose}>Close</Button>
-            <Button type="primary" onClick={onOK}>
-              OK
-            </Button>
-          </Footer>
-        )}
-      </ContentContainer>
-    </ModalWrapper>
+const Modal = ({ isVisible, children, onClose, onOK, title, hasFooter }) => {
+  const [className, setClassName] = useState('');
+
+  useEffect(() => (isVisible ? setClassName('modal-open') : setClassName('')), [
+    isVisible,
+  ]);
+
+  useEffect(() => {
+    document.addEventListener(
+      'keyup',
+      (e) => isVisible && e.keyCode === 27 && onClose()
+    );
+
+    return () => document.removeEventListener('keyup', () => {});
+  }, [isVisible, onClose]);
+
+  return (
+    isVisible && (
+      <ModalWrapper>
+        <ContentContainer className={className}>
+          {title && <Header>{title}</Header>}
+          <CloseButton onClick={onClose}>
+            <CloseOutlined />
+          </CloseButton>
+          <Content>{children}</Content>
+          {hasFooter && (
+            <Footer>
+              <Button onClick={onClose}>Close</Button>
+              <Button type="primary" onClick={onOK}>
+                OK
+              </Button>
+            </Footer>
+          )}
+        </ContentContainer>
+      </ModalWrapper>
+    )
   );
+};
 
 export default Modal;

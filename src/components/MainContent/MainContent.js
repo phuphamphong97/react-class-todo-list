@@ -12,7 +12,7 @@ const MainContent = () => {
         Open modal
       </Button>
       <Modal
-        showModal={showModal}
+        isVisible={showModal}
         onClose={() => setShowModal(false)}
         onOK={() => setShowModal(false)}
         title="This is a title"
