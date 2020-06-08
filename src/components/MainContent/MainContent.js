@@ -1,24 +1,33 @@
 import React, { useState } from 'react';
-import { Button } from 'antd';
+import styled from '@emotion/styled';
+
+import ActionCenter from '../ActionCenter';
+import TaskTable from '../TaskTable';
 import Modal from '../Modal';
 
+import { taskList } from '../../data';
+import { typography } from '../../principles';
+
+const AppTitle = styled.h1`
+  ${typography.types.L};
+`;
+
 const MainContent = () => {
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <h1>Main Content</h1>
-      <Button type="primary" onClick={() => setShowModal(true)}>
-        Open modal
-      </Button>
+      <AppTitle>Todo App</AppTitle>
+      <ActionCenter setShowModal={setShowModal} />
+      <TaskTable taskList={taskList} />
       <Modal
         isVisible={showModal}
         onClose={() => setShowModal(false)}
         onOK={() => setShowModal(false)}
-        title="This is a title"
+        title="Add new task"
         hasFooter
       >
-        <p>Demo modal</p>
+        <p>Task content</p>
       </Modal>
     </>
   );
