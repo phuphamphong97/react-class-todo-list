@@ -1,25 +1,36 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
+import { Typography } from 'antd';
 
 import ActionCenter from '../ActionCenter';
 import TaskTable from '../TaskTable';
 import Modal from '../Modal';
 
 import { taskList } from '../../data';
-import { typography } from '../../principles';
+import { sizes, breakpoints } from '../../principles';
 
-const AppTitle = styled.h1`
-  ${typography.types.L};
+const { Title } = Typography;
+
+const Container = styled.div`
+  margin: 0 auto;
+  max-width: ${sizes.container}px;
+  padding: ${sizes.xxxl}px 0;
+  width: 90%;
+
+  @media (min-width: ${breakpoints.md}px) {
+    padding: ${sizes.huge}px 0;
+  }
 `;
 
 const MainContent = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <>
-      <AppTitle>Todo App</AppTitle>
+    <Container>
+      <Title>Todo App</Title>
       <ActionCenter setShowModal={setShowModal} />
       <TaskTable taskList={taskList} />
+
       <Modal
         isVisible={showModal}
         onClose={() => setShowModal(false)}
@@ -29,7 +40,7 @@ const MainContent = () => {
       >
         <p>Task content</p>
       </Modal>
-    </>
+    </Container>
   );
 };
 

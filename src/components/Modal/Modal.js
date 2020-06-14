@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
+import { Typography } from 'antd';
 
 import { Button } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
-import { colors, depth, sizes, typography } from '../../principles';
+import { colors, depth, sizes } from '../../principles';
+
+const { Title } = Typography;
 
 const ModalWrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
@@ -12,7 +15,7 @@ const ModalWrapper = styled.div`
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: ${depth.zIndexes.modal};
+  z-index: ${depth.zIndexes.high};
 `;
 
 const ContentContainer = styled.div`
@@ -36,8 +39,7 @@ const Content = styled.div`
   margin: ${sizes.md}px 0;
 `;
 
-const Header = styled.h3`
-  ${typography.types.MSemi}
+const StyledTitle = styled(Title)`
   padding-right: ${sizes.xxl}px;
 `;
 
@@ -87,7 +89,7 @@ const Modal = ({ isVisible, children, onClose, onOK, title, hasFooter }) => {
     isVisible && (
       <ModalWrapper>
         <ContentContainer>
-          {title && <Header>{title}</Header>}
+          {title && <StyledTitle level={3}>{title}</StyledTitle>}
           <CloseButton onClick={onClose}>
             <CloseOutlined />
           </CloseButton>

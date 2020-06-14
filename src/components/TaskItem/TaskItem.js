@@ -1,17 +1,23 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Button, Tag, Space } from 'antd';
 
 const TaskItem = ({ task, order }) => {
   return (
     <tr>
       <td>{order + 1}</td>
       <td>{task.name}</td>
-      <td>{task.priority}</td>
       <td>
-        <Button type="primary">Edit</Button>
-        <Button type="primary" danger>
-          Delete
-        </Button>
+        <Tag color={task.priority.color}>{task.priority.level}</Tag>
+      </td>
+      <td>
+        <Space>
+          <Button type="primary" size="small" ghost>
+            Edit
+          </Button>
+          <Button type="primary" size="small" ghost danger>
+            Delete
+          </Button>
+        </Space>
       </td>
     </tr>
   );

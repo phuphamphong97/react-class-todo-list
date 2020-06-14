@@ -8,7 +8,7 @@ const sizes = {
   xxl: 32,
   xxxl: 40,
   huge: 56,
-  max: 64,
+  container: 1280,
 };
 
 export default sizes;

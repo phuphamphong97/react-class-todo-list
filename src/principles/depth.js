@@ -1,7 +1,7 @@
 const zIndexes = {
-  default: 0,
-  navBar: 100,
-  modal: 1000,
+  low: 0,
+  medium: 100,
+  high: 1000,
 };
 
 const boxShadows = {
