@@ -1,17 +1,15 @@
-import { colors } from '../principles';
-
 const taskPriority = {
   low: {
     level: 'low',
-    color: colors.cyan,
+    color: 'blue',
   },
   medium: {
     level: 'medium',
-    color: colors.gold,
+    color: 'volcano',
   },
   high: {
     level: 'high',
-    color: colors.red,
+    color: 'gold',
   },
 };
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-import { colors, sizes } from '../../principles';
 import TaskItem from '../TaskItem';
+import { colors, sizes } from '../../principles';
 
 const Table = styled.table`
   margin-top: ${sizes.xl}px;

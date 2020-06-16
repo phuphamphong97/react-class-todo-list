@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Tag, Space } from 'antd';
+import { Button, Tag, Space, Tooltip } from 'antd';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 const TaskItem = ({ task, order }) => {
   return (
@@ -11,12 +12,12 @@ const TaskItem = ({ task, order }) => {
       </td>
       <td>
         <Space>
-          <Button type="primary" size="small" ghost>
-            Edit
-          </Button>
-          <Button type="primary" size="small" ghost danger>
-            Delete
-          </Button>
+          <Tooltip title="Edit task">
+            <Button type="text" icon={<EditOutlined />} shape="circle" />
+          </Tooltip>
+          <Tooltip title="Delete task">
+            <Button type="text" icon={<DeleteOutlined />} shape="circle" />
+          </Tooltip>
         </Space>
       </td>
     </tr>

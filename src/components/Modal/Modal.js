@@ -36,7 +36,8 @@ const ContentContainer = styled.div`
 
 const Content = styled.div`
   overflow: auto;
-  margin: ${sizes.md}px 0;
+  margin-top: ${sizes.md}px;
+  margin-bottom: ${({ hasFooter }) => (hasFooter ? sizes.md : 0)}px;
 `;
 
 const StyledTitle = styled(Title)`
@@ -93,10 +94,10 @@ const Modal = ({ isVisible, children, onClose, onOK, title, hasFooter }) => {
           <CloseButton onClick={onClose}>
             <CloseOutlined />
           </CloseButton>
-          <Content>{children}</Content>
+          <Content hasFooter={hasFooter}>{children}</Content>
           {hasFooter && (
             <Footer>
-              <Button onClick={onClose}>Close</Button>
+              <Button onClick={onClose}>Cancel</Button>
               <Button type="primary" onClick={onOK}>
                 OK
               </Button>

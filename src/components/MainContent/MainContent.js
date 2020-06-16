@@ -4,6 +4,7 @@ import { Typography } from 'antd';
 
 import ActionCenter from '../ActionCenter';
 import TaskTable from '../TaskTable';
+import AddTaskForm from '../AddTaskForm';
 import Modal from '../Modal';
 
 import { taskList } from '../../data';
@@ -36,9 +37,8 @@ const MainContent = () => {
         onClose={() => setShowModal(false)}
         onOK={() => setShowModal(false)}
         title="Add new task"
-        hasFooter
       >
-        <p>Task content</p>
+        <AddTaskForm />
       </Modal>
     </Container>
   );
