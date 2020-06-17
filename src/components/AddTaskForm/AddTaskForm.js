@@ -1,7 +1,7 @@
 import React from 'react';
-import { Form, Input, Select, Button } from 'antd';
+import { Form, Input, Radio, Button, Tag } from 'antd';
 
-const { Option } = Select;
+import { taskPriority } from '../../data';
 
 const layout = {
   labelCol: {
@@ -18,6 +18,11 @@ const tailLayout = {
   },
 };
 
+const priorities = Object.keys(taskPriority).reduce((acc, curVal) => {
+  acc.push(taskPriority[curVal]);
+  return acc;
+}, []);
+
 const AddTaskForm = () => {
   const onFinish = (values) => {
     console.log('Success:', values);
@@ -30,7 +35,7 @@ const AddTaskForm = () => {
   return (
     <Form
       {...layout}
-      initialValues={{ priority: 'low' }}
+      initialValues={{ priority: priorities[0] }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
@@ -44,20 +49,22 @@ const AddTaskForm = () => {
           },
         ]}
       >
-        <Input />
+        <Input placeholder="Type the task name" />
       </Form.Item>
 
       <Form.Item label="Priority" name="priority">
-        <Select>
-          <Option value="low">Low</Option>
-          <Option value="medium">Medium</Option>
-          <Option value="high">High</Option>
-        </Select>
+        <Radio.Group buttonStyle="solid">
+          {priorities.map((priority, index) => (
+            <Radio key={index} value={priority}>
+              <Tag color={priority.color}>{priority.level}</Tag>
+            </Radio>
+          ))}
+        </Radio.Group>
       </Form.Item>
 
       <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
-          Add
+          Add task
         </Button>
       </Form.Item>
     </Form>

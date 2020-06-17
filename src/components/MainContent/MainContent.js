@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { Typography } from 'antd';
+import { Typography, Result, Button } from 'antd';
+import { InfoCircleTwoTone, PlusOutlined } from '@ant-design/icons';
 
 import ActionCenter from '../ActionCenter';
 import TaskTable from '../TaskTable';
@@ -29,8 +30,26 @@ const MainContent = () => {
   return (
     <Container>
       <Title>Todo App</Title>
-      <ActionCenter setShowModal={setShowModal} />
-      <TaskTable taskList={taskList} />
+      {taskList && taskList.length ? (
+        <>
+          <ActionCenter setShowModal={setShowModal} />
+          <TaskTable taskList={taskList} />
+        </>
+      ) : (
+        <Result
+          icon={<InfoCircleTwoTone />}
+          title="Your task list is empty now, add a new one?"
+          extra={
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={() => setShowModal(true)}
+            >
+              New task
+            </Button>
+          }
+        />
+      )}
 
       <Modal
         isVisible={showModal}
