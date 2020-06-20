@@ -8,7 +8,7 @@ import TaskTable from '../TaskTable';
 import AddTaskForm from '../AddTaskForm';
 import Modal from '../Modal';
 
-import { taskList } from '../../data';
+import { taskData } from '../../data';
 import { sizes, breakpoints } from '../../principles';
 
 const { Title } = Typography;
@@ -26,6 +26,12 @@ const Container = styled.div`
 
 const MainContent = () => {
   const [showModal, setShowModal] = useState(false);
+  const [taskList, setTaskList] = useState(taskData);
+
+  const addTask = (task) => {
+    taskList.push(task);
+    setTaskList(taskList);
+  };
 
   return (
     <Container>
@@ -57,7 +63,7 @@ const MainContent = () => {
         onOK={() => setShowModal(false)}
         title="Add new task"
       >
-        <AddTaskForm />
+        <AddTaskForm {...{addTask}} />
       </Modal>
     </Container>
   );

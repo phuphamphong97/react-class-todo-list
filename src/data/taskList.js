@@ -1,6 +1,6 @@
 import taskPriority from './taskPriority';
 
-const taskData = [
+const taskList = [
   {
     id: 1,
     name: 'Task out new US',
@@ -58,4 +58,4 @@ const taskData = [
   },
 ];
 
-export default taskData;
+export default taskList;

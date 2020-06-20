@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Radio, Button, Tag } from 'antd';
 
 import { taskPriority } from '../../data';
+import { objectToArray } from '../../utils';
 
 const layout = {
   labelCol: {
@@ -18,14 +19,12 @@ const tailLayout = {
   },
 };
 
-const priorities = Object.keys(taskPriority).reduce((acc, curVal) => {
-  acc.push(taskPriority[curVal]);
-  return acc;
-}, []);
+const AddTaskForm = ({ addTask }) => {
+  const priorities = objectToArray(taskPriority);
 
-const AddTaskForm = () => {
-  const onFinish = (values) => {
-    console.log('Success:', values);
+  const onFinish = (newTask) => {
+    console.log('Added task:', newTask);
+    addTask(newTask);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -41,7 +40,7 @@ const AddTaskForm = () => {
     >
       <Form.Item
         label="Task name"
-        name="taskName"
+        name="name"
         rules={[
           {
             required: true,
