@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Radio, Button, Tag } from 'antd';
+import { Form, Input, Radio, Button, Tag, message } from 'antd';
 
 import { taskPriority } from '../../data';
 import { objectToArray } from '../../utils';
@@ -19,24 +19,26 @@ const tailLayout = {
   },
 };
 
-const AddTaskForm = ({ addTask }) => {
+const AddTaskForm = ({ addTask, setShowModal }) => {
   const priorities = objectToArray(taskPriority);
 
-  const onFinish = (newTask) => {
-    console.log('Added task:', newTask);
+  const onSuccess = (newTask) => {
     addTask(newTask);
+    setShowModal(false);
+    message.success('New task added successfully.');
   };
 
-  const onFinishFailed = (errorInfo) => {
+  const onFailure = (errorInfo) => {
     console.log('Failed:', errorInfo);
+    message.error('Something went wrong, please try again.');
   };
 
   return (
     <Form
       {...layout}
       initialValues={{ priority: priorities[0] }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
+      onFinish={onSuccess}
+      onFinishFailed={onFailure}
     >
       <Form.Item
         label="Task name"

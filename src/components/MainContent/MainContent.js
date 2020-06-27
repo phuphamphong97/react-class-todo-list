@@ -60,10 +60,9 @@ const MainContent = () => {
       <Modal
         isVisible={showModal}
         onClose={() => setShowModal(false)}
-        onOK={() => setShowModal(false)}
         title="Add new task"
       >
-        <AddTaskForm {...{addTask}} />
+        <AddTaskForm {...{addTask, setShowModal}} />
       </Modal>
     </Container>
   );

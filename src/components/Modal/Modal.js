@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { Typography } from 'antd';
 
-import { Button } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { colors, depth, sizes } from '../../principles';
 
@@ -37,20 +37,10 @@ const ContentContainer = styled.div`
 const Content = styled.div`
   overflow: auto;
   margin-top: ${sizes.md}px;
-  margin-bottom: ${({ hasFooter }) => (hasFooter ? sizes.md : 0)}px;
 `;
 
 const StyledTitle = styled(Title)`
   padding-right: ${sizes.xxl}px;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-
-  button {
-    margin: 0 ${sizes.micro}px;
-  }
 `;
 
 const CloseButton = styled.button`
@@ -76,7 +66,7 @@ const CloseButton = styled.button`
   }
 `;
 
-const Modal = ({ isVisible, children, onClose, onOK, title, hasFooter }) => {
+const Modal = ({ isVisible, children, onClose, title }) => {
   useEffect(() => {
     document.addEventListener(
       'keyup',
@@ -94,19 +84,16 @@ const Modal = ({ isVisible, children, onClose, onOK, title, hasFooter }) => {
           <CloseButton onClick={onClose}>
             <CloseOutlined />
           </CloseButton>
-          <Content hasFooter={hasFooter}>{children}</Content>
-          {hasFooter && (
-            <Footer>
-              <Button onClick={onClose}>Cancel</Button>
-              <Button type="primary" onClick={onOK}>
-                OK
-              </Button>
-            </Footer>
-          )}
+          <Content>{children}</Content>
         </ContentContainer>
       </ModalWrapper>
     )
   );
+};
+
+// Specify that only a single child can be passed to Modal as children.
+Modal.propTypes = {
+  children: PropTypes.element.isRequired,
 };
 
 export default Modal;
