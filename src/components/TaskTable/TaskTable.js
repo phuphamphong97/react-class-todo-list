@@ -18,7 +18,7 @@ const Table = styled.table`
   }
 `;
 
-const TaskTable = ({ taskList }) => {
+const TaskTable = ({ taskList, deleteTask }) => {
   return (
     <Table>
       <thead>
@@ -31,7 +31,7 @@ const TaskTable = ({ taskList }) => {
       </thead>
       <tbody>
         {taskList.map((task, order) => (
-          <TaskItem key={order} {...{ task, order }} />
+          <TaskItem key={order} {...{ task, order, deleteTask }} />
         ))}
       </tbody>
     </Table>

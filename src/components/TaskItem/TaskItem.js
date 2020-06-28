@@ -1,8 +1,13 @@
 import React from 'react';
-import { Button, Tag, Space, Tooltip } from 'antd';
+import { Button, Tag, Space, Popconfirm, message } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
-const TaskItem = ({ task, order }) => {
+const TaskItem = ({ task, order, deleteTask }) => {
+  const onDeleteTask = (taskId) => {
+    deleteTask(taskId);
+    message.success('Deleted task.');
+  };
+
   return (
     <tr>
       <td>{order + 1}</td>
@@ -12,12 +17,16 @@ const TaskItem = ({ task, order }) => {
       </td>
       <td>
         <Space>
-          <Tooltip title="Edit task">
-            <Button type="text" icon={<EditOutlined />} shape="circle" />
-          </Tooltip>
-          <Tooltip title="Delete task">
+          <Button type="text" icon={<EditOutlined />} shape="circle" />
+          <Popconfirm
+            title="Are you sure?"
+            onConfirm={() => onDeleteTask(task.id)}
+            onCancel={() => {}}
+            okText="Yes"
+            cancelText="No"
+          >
             <Button type="text" icon={<DeleteOutlined />} shape="circle" />
-          </Tooltip>
+          </Popconfirm>
         </Space>
       </td>
     </tr>

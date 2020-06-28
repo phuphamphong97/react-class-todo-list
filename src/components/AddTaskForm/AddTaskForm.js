@@ -25,7 +25,7 @@ const AddTaskForm = ({ addTask, setShowModal }) => {
   const onSuccess = (newTask) => {
     addTask(newTask);
     setShowModal(false);
-    message.success('New task added successfully.');
+    message.success('Added new task.');
   };
 
   const onFailure = (errorInfo) => {

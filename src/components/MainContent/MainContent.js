@@ -33,13 +33,17 @@ const MainContent = () => {
     setTaskList(taskList);
   };
 
+  const deleteTask = (taskId) => {
+    setTaskList(taskList.filter((task) => task.id !== taskId));
+  };
+
   return (
     <Container>
       <Title>Todo App</Title>
       {taskList && taskList.length ? (
         <>
           <ActionCenter setShowModal={setShowModal} />
-          <TaskTable taskList={taskList} />
+          <TaskTable {...{ taskList, deleteTask }} />
         </>
       ) : (
         <Result
@@ -62,7 +66,7 @@ const MainContent = () => {
         onClose={() => setShowModal(false)}
         title="Add new task"
       >
-        <AddTaskForm {...{addTask, setShowModal}} />
+        <AddTaskForm {...{ addTask, setShowModal }} />
       </Modal>
     </Container>
   );
