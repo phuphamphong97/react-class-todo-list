@@ -8,7 +8,7 @@ import {
   CloseCircleOutlined,
 } from '@ant-design/icons';
 
-import { taskPriority } from '../../data';
+import { taskPriorities } from '../../data';
 
 const TaskItem = ({ task, order, deleteTask }) => {
   const [isEditing, setEditing] = useState(false);
@@ -37,8 +37,8 @@ const TaskItem = ({ task, order, deleteTask }) => {
         )}
       </td>
       <td>
-        <Tag color={taskPriority[priority].color}>
-          {taskPriority[priority].level}
+        <Tag color={taskPriorities[priority].color}>
+          {taskPriorities[priority].level}
         </Tag>
       </td>
       <td>

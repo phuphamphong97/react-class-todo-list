@@ -6,6 +6,7 @@ import { PlusOutlined } from '@ant-design/icons';
 
 import FlexBox from '../FlexBox';
 import { sizes, depth, breakpoints } from '../../principles';
+import { sortValues } from '../../constants';
 
 const { Option } = Select;
 const { Search } = Input;
@@ -36,11 +37,12 @@ const ActionCenter = ({ setShowModal }) => {
               placeholder="Type name or priority to search"
               onSearch={(value) => console.log(value)}
             />
-            <Select defaultValue="nameAsc" onChange={() => {}}>
-              <Option value="nameAsc">Name ASC</Option>
-              <Option value="nameDesc">Name DESC</Option>
-              <Option value="priorityAsc">Priority ASC</Option>
-              <Option value="priorityDesc">Priority DESC</Option>
+            <Select defaultValue={sortValues[0].value} onChange={() => {}}>
+              {sortValues.map((sortValue, index) => (
+                <Option key={index} value={sortValue.value}>
+                  {sortValue.name}
+                </Option>
+              ))}
             </Select>
           </FlexBox>
         </Col>

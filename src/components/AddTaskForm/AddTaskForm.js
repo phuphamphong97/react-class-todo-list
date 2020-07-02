@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import { Form, Input, Radio, Button, Tag, message } from 'antd';
 
-import { taskPriority } from '../../data';
+import { taskPriorities } from '../../data';
 
 const layout = {
   labelCol: {
@@ -55,7 +55,7 @@ const AddTaskForm = ({ addTask, setShowModal }) => {
 
       <Form.Item label="Priority" name="priority">
         <Radio.Group>
-          {taskPriority.map((priority, index) => (
+          {taskPriorities.map((priority, index) => (
             <Radio key={index} value={index}>
               <Tag color={priority.color}>{priority.level}</Tag>
             </Radio>

@@ -1,4 +1,4 @@
-const taskPriority = [
+const taskPriorities = [
   {
     level: 'low',
     color: 'blue',
@@ -13,4 +13,4 @@ const taskPriority = [
   },
 ];
 
-export default taskPriority;
+export default taskPriorities;

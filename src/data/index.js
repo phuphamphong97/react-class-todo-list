@@ -1,2 +1,2 @@
 export { default as taskData } from './taskList';
-export { default as taskPriority } from './taskPriority';
+export { default as taskPriorities } from './taskPriorities';
