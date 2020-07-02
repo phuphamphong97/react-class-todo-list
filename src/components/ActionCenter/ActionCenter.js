@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { Button, Select, Input, Row, Col } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
@@ -64,6 +65,10 @@ const ActionCenter = ({ setShowModal }) => {
       />
     </>
   );
+};
+
+ActionCenter.propTypes = {
+  setShowModal: PropTypes.func,
 };
 
 export default ActionCenter;

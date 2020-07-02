@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
 import TaskItem from '../TaskItem';
@@ -36,6 +37,11 @@ const TaskTable = ({ taskList, deleteTask }) => {
       </tbody>
     </Table>
   );
+};
+
+TaskTable.propTypes = {
+  taskList: PropTypes.arrayOf(PropTypes.object),
+  deleteTask: PropTypes.func,
 };
 
 export default TaskTable;

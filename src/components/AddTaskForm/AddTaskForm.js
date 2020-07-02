@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Form, Input, Radio, Button, Tag, message } from 'antd';
 
 import { taskPriority } from '../../data';
@@ -54,7 +55,7 @@ const AddTaskForm = ({ addTask, setShowModal }) => {
       </Form.Item>
 
       <Form.Item label="Priority" name="priority">
-        <Radio.Group buttonStyle="solid">
+        <Radio.Group>
           {priorities.map((priority, index) => (
             <Radio key={index} value={priority}>
               <Tag color={priority.color}>{priority.level}</Tag>
@@ -70,6 +71,11 @@ const AddTaskForm = ({ addTask, setShowModal }) => {
       </Form.Item>
     </Form>
   );
+};
+
+AddTaskForm.propTypes = {
+  addTask: PropTypes.func,
+  setShowModal: PropTypes.func,
 };
 
 export default AddTaskForm;

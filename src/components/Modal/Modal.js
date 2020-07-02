@@ -91,9 +91,10 @@ const Modal = ({ isVisible, children, onClose, title }) => {
   );
 };
 
-// Specify that only a single child can be passed to Modal as children.
 Modal.propTypes = {
-  children: PropTypes.element.isRequired,
+  isVisible: PropTypes.bool,
+  onClose: PropTypes.func,
+  title: PropTypes.string,
 };
 
 export default Modal;

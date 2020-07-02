@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
 const FlexContainer = styled.div`
@@ -15,6 +16,13 @@ const FlexBox = ({ direction, align, justify, wrap, children }) => {
       {React.Children.map(children, (child) => child)}
     </FlexContainer>
   );
+};
+
+FlexBox.propTypes = {
+  direction: PropTypes.string,
+  align: PropTypes.string,
+  justify: PropTypes.string,
+  wrap: PropTypes.string,
 };
 
 export default FlexBox;
