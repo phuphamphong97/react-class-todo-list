@@ -1,60 +1,60 @@
-import taskPriority from './taskPriority';
+import { v4 as uuidv4 } from 'uuid';
 
 const taskList = [
   {
-    id: 1,
+    id: uuidv4(),
     name: 'Task out new US',
-    priority: taskPriority.low,
+    priority: 0,
   },
   {
-    id: 2,
+    id: uuidv4(),
     name: 'Burn down daily task',
-    priority: taskPriority.medium,
+    priority: 1,
   },
   {
-    id: 3,
+    id: uuidv4(),
     name: 'Change phone wallpaper',
-    priority: taskPriority.low,
+    priority: 0,
   },
   {
-    id: 4,
+    id: uuidv4(),
     name: 'Prepare for the company trip',
-    priority: taskPriority.high,
+    priority: 2,
   },
   {
-    id: 5,
+    id: uuidv4(),
     name: 'Pay for the internet invoice',
-    priority: taskPriority.medium,
+    priority: 1,
   },
   {
-    id: 6,
+    id: uuidv4(),
     name: 'Reply to interview invitation',
-    priority: taskPriority.medium,
+    priority: 2,
   },
   {
-    id: 7,
+    id: uuidv4(),
     name: 'Register for the IELTS class',
-    priority: taskPriority.low,
+    priority: 0,
   },
   {
-    id: 8,
+    id: uuidv4(),
     name: 'Buy a new chair',
-    priority: taskPriority.low,
+    priority: 0,
   },
   {
-    id: 9,
+    id: uuidv4(),
     name: 'Hangout with friends',
-    priority: taskPriority.high,
+    priority: 1,
   },
   {
-    id: 10,
+    id: uuidv4(),
     name: 'Seek for a new job',
-    priority: taskPriority.high,
+    priority: 2,
   },
   {
-    id: 11,
+    id: uuidv4(),
     name: 'Check all messages on LinkedIn',
-    priority: taskPriority.low,
+    priority: 0,
   },
 ];
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 import { Form, Input, Radio, Button, Tag, message } from 'antd';
 
 import { taskPriority } from '../../data';
-import { objectToArray } from '../../utils';
 
 const layout = {
   labelCol: {
@@ -21,9 +21,8 @@ const tailLayout = {
 };
 
 const AddTaskForm = ({ addTask, setShowModal }) => {
-  const priorities = objectToArray(taskPriority);
-
   const onSuccess = (newTask) => {
+    newTask.id = uuidv4();
     addTask(newTask);
     setShowModal(false);
     message.success('Added new task.');
@@ -37,7 +36,7 @@ const AddTaskForm = ({ addTask, setShowModal }) => {
   return (
     <Form
       {...layout}
-      initialValues={{ priority: priorities[0] }}
+      initialValues={{ priority: 0 }}
       onFinish={onSuccess}
       onFinishFailed={onFailure}
     >
@@ -56,8 +55,8 @@ const AddTaskForm = ({ addTask, setShowModal }) => {
 
       <Form.Item label="Priority" name="priority">
         <Radio.Group>
-          {priorities.map((priority, index) => (
-            <Radio key={index} value={priority}>
+          {taskPriority.map((priority, index) => (
+            <Radio key={index} value={index}>
               <Tag color={priority.color}>{priority.level}</Tag>
             </Radio>
           ))}

@@ -8,8 +8,11 @@ import {
   CloseCircleOutlined,
 } from '@ant-design/icons';
 
+import { taskPriority } from '../../data';
+
 const TaskItem = ({ task, order, deleteTask }) => {
   const [isEditing, setEditing] = useState(false);
+  const { id, name, priority } = task;
 
   const onDeleteTask = (taskId) => {
     deleteTask(taskId);
@@ -27,10 +30,16 @@ const TaskItem = ({ task, order, deleteTask }) => {
     <tr>
       <td>{order + 1}</td>
       <td>
-        {isEditing ? <Input defaultValue={task.name} autoFocus /> : task.name}
+        {isEditing ? (
+          <Input defaultValue={name} autoFocus onBlur={onCancelEditing} />
+        ) : (
+          name
+        )}
       </td>
       <td>
-        <Tag color={task.priority.color}>{task.priority.level}</Tag>
+        <Tag color={taskPriority[priority].color}>
+          {taskPriority[priority].level}
+        </Tag>
       </td>
       <td>
         <Space>
@@ -59,7 +68,7 @@ const TaskItem = ({ task, order, deleteTask }) => {
               />
               <Popconfirm
                 title="Are you sure?"
-                onConfirm={() => onDeleteTask(task.id)}
+                onConfirm={() => onDeleteTask(id)}
                 onCancel={() => {}}
                 okText="Yes"
                 cancelText="No"
