@@ -27,6 +27,9 @@ const Container = styled.div`
 const MainContent = () => {
   const [showModal, setShowModal] = useState(false);
   const [taskList, setTaskList] = useState(taskData);
+  const [orderBy, setOrderBy] = useState('created');
+  const [orderDir, setOrderDir] = useState('asc');
+  //const [searchText, setSearchText] = useState('');
 
   const addTask = (task) => {
     taskList.push(task);
@@ -37,12 +40,18 @@ const MainContent = () => {
     setTaskList(taskList.filter((task) => task.id !== taskId));
   };
 
+  // TODO: refactor this func using useMemo or useCallback
+  const sortTaskList = (sortBy, sortDir) => {
+    sortBy !== orderBy && setOrderBy(sortBy);
+    sortDir !== orderDir && setOrderDir(sortDir);
+  };
+
   return (
     <Container>
       <Title>Todo App</Title>
       {taskList && taskList.length ? (
         <>
-          <ActionCenter setShowModal={setShowModal} />
+          <ActionCenter {...{ setShowModal, sortTaskList }} />
           <TaskTable {...{ taskList, deleteTask }} />
         </>
       ) : (

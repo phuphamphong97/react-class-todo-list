@@ -24,8 +24,6 @@ const TaskItem = ({ task, order, deleteTask }) => {
     message.warning('Nothing changed.');
   };
 
-  //)
-
   return (
     <tr>
       <td>{order + 1}</td>

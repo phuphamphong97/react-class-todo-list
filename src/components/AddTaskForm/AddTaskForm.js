@@ -23,6 +23,8 @@ const tailLayout = {
 const AddTaskForm = ({ addTask, setShowModal }) => {
   const onSuccess = (newTask) => {
     newTask.id = uuidv4();
+    newTask.created = JSON.stringify(new Date());
+
     addTask(newTask);
     setShowModal(false);
     message.success('Added new task.');

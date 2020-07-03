@@ -27,7 +27,12 @@ const BubbleButton = styled(Button)`
   }
 `;
 
-const ActionCenter = ({ setShowModal }) => {
+const ActionCenter = ({ setShowModal, sortTaskList }) => {
+  const onSort = (value) => {
+    const [sortBy, sortDir] = value.toString().split('-');
+    sortTaskList(sortBy, sortDir);
+  };
+
   return (
     <>
       <Row>
@@ -37,7 +42,7 @@ const ActionCenter = ({ setShowModal }) => {
               placeholder="Type name or priority to search"
               onSearch={(value) => console.log(value)}
             />
-            <Select defaultValue={sortValues[0].value} onChange={() => {}}>
+            <Select defaultValue={sortValues[0].value} onChange={onSort}>
               {sortValues.map((sortValue, index) => (
                 <Option key={index} value={sortValue.value}>
                   {sortValue.name}
@@ -71,6 +76,7 @@ const ActionCenter = ({ setShowModal }) => {
 
 ActionCenter.propTypes = {
   setShowModal: PropTypes.func,
+  onSort: PropTypes.func,
 };
 
 export default ActionCenter;
