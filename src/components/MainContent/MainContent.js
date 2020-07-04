@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import styled from '@emotion/styled';
 import { Typography, Result, Button } from 'antd';
 import { InfoCircleTwoTone, PlusOutlined } from '@ant-design/icons';
@@ -33,7 +33,7 @@ const MainContent = () => {
 
   const addTask = (task) => {
     taskList.push(task);
-    setTaskList(taskList);
+    setTaskList([...taskList]);
   };
 
   const deleteTask = (taskId) => {
@@ -50,13 +50,34 @@ const MainContent = () => {
     setSearchText(searchValue);
   };
 
+  const taskListSearch = useMemo(
+    () =>
+      taskList.filter(
+        (task) => task.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1
+      ),
+    [searchText, taskList]
+  );
+
+  const taskListSearchSort = useMemo(() => {
+    let returnIndex = 1;
+    if (orderDir === 'desc') returnIndex = -1;
+
+    taskListSearch.sort((a, b) => {
+      if (a[orderBy] > b[orderBy]) return returnIndex;
+      else if (a[orderBy] > b[orderBy]) return -1 * returnIndex;
+      return 0;
+    });
+
+    return [...taskListSearch];
+  }, [orderBy, orderDir, taskListSearch]);
+
   return (
     <Container>
       <Title>Todo App</Title>
       {taskList && taskList.length ? (
         <>
           <ActionCenter {...{ setShowModal, onSort, onSearch }} />
-          <TaskTable {...{ taskList, deleteTask }} />
+          <TaskTable {...{ taskListSearchSort, deleteTask }} />
         </>
       ) : (
         <Result

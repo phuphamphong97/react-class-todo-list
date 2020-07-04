@@ -8,7 +8,9 @@ import FlexBox from '../FlexBox';
 import { sizes, depth, breakpoints } from '../../principles';
 import { sortValues } from '../../constants';
 
-const SearchBox = styled(Input.Search)`
+const { Option } = Select;
+
+const SearchBox = styled(Input)`
   margin-right: ${sizes.xs}px;
 `;
 
@@ -33,16 +35,16 @@ const ActionCenter = ({ setShowModal, onSort, onSearch }) => {
             <SearchBox
               allowClear
               placeholder="Type name or priority to search"
-              onSearch={(searchValue) => onSearch(searchValue)}
+              onChange={(e) => onSearch(e.target.value)}
             />
             <Select
               defaultValue={sortValues[0].value}
               onChange={(sortValue) => onSort(sortValue)}
             >
               {sortValues.map((sortValue, index) => (
-                <Select.Option key={index} value={sortValue.value}>
+                <Option key={index} value={sortValue.value}>
                   {sortValue.name}
-                </Select.Option>
+                </Option>
               ))}
             </Select>
           </FlexBox>

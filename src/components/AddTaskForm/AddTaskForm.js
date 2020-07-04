@@ -5,6 +5,8 @@ import { Form, Input, Button, Select, message } from 'antd';
 
 import { taskPriorities } from '../../data';
 
+const { Option } = Select;
+
 const layout = {
   labelCol: {
     span: 24,
@@ -58,9 +60,9 @@ const AddTaskForm = ({ addTask, setShowModal }) => {
       <Form.Item label="Priority" name="priority">
         <Select>
           {taskPriorities.map((priority, index) => (
-            <Select.Option key={index} value={index}>
+            <Option key={index} value={index}>
               {priority.level}
-            </Select.Option>
+            </Option>
           ))}
         </Select>
       </Form.Item>

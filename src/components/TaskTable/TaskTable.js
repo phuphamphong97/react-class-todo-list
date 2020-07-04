@@ -19,7 +19,7 @@ const Table = styled.table`
   }
 `;
 
-const TaskTable = ({ taskList, deleteTask }) => {
+const TaskTable = ({ taskListSearchSort, deleteTask }) => {
   return (
     <Table>
       <thead>
@@ -31,7 +31,7 @@ const TaskTable = ({ taskList, deleteTask }) => {
         </tr>
       </thead>
       <tbody>
-        {taskList.map((task, order) => (
+        {taskListSearchSort.map((task, order) => (
           <TaskItem key={order} {...{ task, order, deleteTask }} />
         ))}
       </tbody>
@@ -40,7 +40,7 @@ const TaskTable = ({ taskList, deleteTask }) => {
 };
 
 TaskTable.propTypes = {
-  taskList: PropTypes.arrayOf(PropTypes.object),
+  taskListSearchSort: PropTypes.arrayOf(PropTypes.object),
   deleteTask: PropTypes.func,
 };
 

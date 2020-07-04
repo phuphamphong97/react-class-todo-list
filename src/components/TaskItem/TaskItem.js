@@ -10,6 +10,8 @@ import {
 
 import { taskPriorities } from '../../data';
 
+const { Option } = Select;
+
 const TaskItem = ({ task, order, deleteTask }) => {
   const [isEditing, setEditing] = useState(false);
   const { id, name, priority } = task;
@@ -32,9 +34,9 @@ const TaskItem = ({ task, order, deleteTask }) => {
         {isEditing ? (
           <Select defaultValue={priority} onChange={() => {}}>
             {taskPriorities.map((priority, index) => (
-              <Select.Option key={index} value={index}>
+              <Option key={index} value={index}>
                 {priority.level}
-              </Select.Option>
+              </Option>
             ))}
           </Select>
         ) : (
@@ -69,7 +71,7 @@ const TaskItem = ({ task, order, deleteTask }) => {
                 onClick={() => setEditing(true)}
               />
               <Popconfirm
-                title="Are you sure?"
+                title="Are you sure to delete this task?"
                 onConfirm={() => onDeleteTask(id)}
                 onCancel={() => {}}
                 okText="Yes"
