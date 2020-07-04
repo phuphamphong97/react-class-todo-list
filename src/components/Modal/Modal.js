@@ -26,7 +26,7 @@ const ContentContainer = styled.div`
   flex-direction: column;
   left: 50%;
   max-height: 75%;
-  max-width: 750px;
+  max-width: ${({ width }) => width || 700}px;
   padding: ${sizes.lg}px;
   position: relative;
   top: 50%;
@@ -66,7 +66,7 @@ const CloseButton = styled.button`
   }
 `;
 
-const Modal = ({ isVisible, children, onClose, title }) => {
+const Modal = ({ isVisible, children, onClose, title, width }) => {
   useEffect(() => {
     document.addEventListener(
       'keyup',
@@ -79,7 +79,7 @@ const Modal = ({ isVisible, children, onClose, title }) => {
   return (
     isVisible && (
       <ModalWrapper>
-        <ContentContainer>
+        <ContentContainer width={width}>
           {title && <StyledTitle level={3}>{title}</StyledTitle>}
           <CloseButton onClick={onClose}>
             <CloseOutlined />
@@ -95,6 +95,7 @@ Modal.propTypes = {
   isVisible: PropTypes.bool,
   onClose: PropTypes.func,
   title: PropTypes.string,
+  width: PropTypes.number,
 };
 
 export default Modal;

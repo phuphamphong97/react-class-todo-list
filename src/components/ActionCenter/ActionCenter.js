@@ -8,10 +8,7 @@ import FlexBox from '../FlexBox';
 import { sizes, depth, breakpoints } from '../../principles';
 import { sortValues } from '../../constants';
 
-const { Option } = Select;
-const { Search } = Input;
-
-const SearchBox = styled(Search)`
+const SearchBox = styled(Input.Search)`
   margin-right: ${sizes.xs}px;
 `;
 
@@ -27,26 +24,25 @@ const BubbleButton = styled(Button)`
   }
 `;
 
-const ActionCenter = ({ setShowModal, sortTaskList }) => {
-  const onSort = (value) => {
-    const [sortBy, sortDir] = value.toString().split('-');
-    sortTaskList(sortBy, sortDir);
-  };
-
+const ActionCenter = ({ setShowModal, onSort, onSearch }) => {
   return (
     <>
       <Row>
         <Col xs={24} md={16} lg={12}>
           <FlexBox>
             <SearchBox
+              allowClear
               placeholder="Type name or priority to search"
-              onSearch={(value) => console.log(value)}
+              onSearch={(searchValue) => onSearch(searchValue)}
             />
-            <Select defaultValue={sortValues[0].value} onChange={onSort}>
+            <Select
+              defaultValue={sortValues[0].value}
+              onChange={(sortValue) => onSort(sortValue)}
+            >
               {sortValues.map((sortValue, index) => (
-                <Option key={index} value={sortValue.value}>
+                <Select.Option key={index} value={sortValue.value}>
                   {sortValue.name}
-                </Option>
+                </Select.Option>
               ))}
             </Select>
           </FlexBox>
@@ -77,6 +73,7 @@ const ActionCenter = ({ setShowModal, sortTaskList }) => {
 ActionCenter.propTypes = {
   setShowModal: PropTypes.func,
   onSort: PropTypes.func,
+  onSearch: PropTypes.func,
 };
 
 export default ActionCenter;

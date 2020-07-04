@@ -29,7 +29,7 @@ const MainContent = () => {
   const [taskList, setTaskList] = useState(taskData);
   const [orderBy, setOrderBy] = useState('created');
   const [orderDir, setOrderDir] = useState('asc');
-  //const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState('');
 
   const addTask = (task) => {
     taskList.push(task);
@@ -40,10 +40,14 @@ const MainContent = () => {
     setTaskList(taskList.filter((task) => task.id !== taskId));
   };
 
-  // TODO: refactor this func using useMemo or useCallback
-  const sortTaskList = (sortBy, sortDir) => {
-    sortBy !== orderBy && setOrderBy(sortBy);
-    sortDir !== orderDir && setOrderDir(sortDir);
+  const onSort = (sortValue) => {
+    const [sortBy, sortDir] = sortValue.toString().split('-');
+    setOrderBy(sortBy);
+    setOrderDir(sortDir);
+  };
+
+  const onSearch = (searchValue) => {
+    setSearchText(searchValue);
   };
 
   return (
@@ -51,7 +55,7 @@ const MainContent = () => {
       <Title>Todo App</Title>
       {taskList && taskList.length ? (
         <>
-          <ActionCenter {...{ setShowModal, sortTaskList }} />
+          <ActionCenter {...{ setShowModal, onSort, onSearch }} />
           <TaskTable {...{ taskList, deleteTask }} />
         </>
       ) : (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Tag, Input, Space, Popconfirm, message } from 'antd';
+import { Button, Tag, Input, Space, Popconfirm, Select, message } from 'antd';
 import {
   EditOutlined,
   DeleteOutlined,
@@ -27,17 +27,21 @@ const TaskItem = ({ task, order, deleteTask }) => {
   return (
     <tr>
       <td>{order + 1}</td>
+      <td>{isEditing ? <Input defaultValue={name} autoFocus /> : name}</td>
       <td>
         {isEditing ? (
-          <Input defaultValue={name} autoFocus onBlur={onCancelEditing} />
+          <Select defaultValue={priority} onChange={() => {}}>
+            {taskPriorities.map((priority, index) => (
+              <Select.Option key={index} value={index}>
+                {priority.level}
+              </Select.Option>
+            ))}
+          </Select>
         ) : (
-          name
+          <Tag color={taskPriorities[priority].color}>
+            {taskPriorities[priority].level}
+          </Tag>
         )}
-      </td>
-      <td>
-        <Tag color={taskPriorities[priority].color}>
-          {taskPriorities[priority].level}
-        </Tag>
       </td>
       <td>
         <Space>

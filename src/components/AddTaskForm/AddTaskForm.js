@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
-import { Form, Input, Radio, Button, Tag, message } from 'antd';
+import { Form, Input, Button, Select, message } from 'antd';
 
 import { taskPriorities } from '../../data';
 
@@ -56,13 +56,13 @@ const AddTaskForm = ({ addTask, setShowModal }) => {
       </Form.Item>
 
       <Form.Item label="Priority" name="priority">
-        <Radio.Group>
+        <Select>
           {taskPriorities.map((priority, index) => (
-            <Radio key={index} value={index}>
-              <Tag color={priority.color}>{priority.level}</Tag>
-            </Radio>
+            <Select.Option key={index} value={index}>
+              {priority.level}
+            </Select.Option>
           ))}
-        </Radio.Group>
+        </Select>
       </Form.Item>
 
       <Form.Item {...tailLayout}>
